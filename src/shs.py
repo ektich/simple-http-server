@@ -15,11 +15,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
         print("==================")
         self.end_headers()
 
+    def do_POST(self):
+        self.send_response(200)
+        print(self.requestline)
+        print(self.headers)
+        print(self.rfile.read())
+        print("=================")
+        self.end_headers()
+
 
 def main():
-    httpd = http.server.ThreadingHTTPServer(('0.0.0.0', 8080),
+    httpd = http.server.ThreadingHTTPServer(('0.0.0.0', 3128),
                                             Handler)
-    print("Hit me!")
+    print("Hit me (3128)!")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
